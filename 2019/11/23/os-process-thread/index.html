@@ -510,75 +510,75 @@
 <p>上面的步骤是操作系统创建进程时的要做的事情，但是准确一点来说，作为开发者怎么创建一个进程的呢？或者我们是怎么告诉操作系统要运行一个程序的呢？</p>
 <p>答案就是：由当前正在执行的程序告诉操作系统。就比如，当我们双击桌面上的程序快捷键时，桌面应用程序响应了我们的点击事件，然后知道我们要运行这个程序，然后它就告诉操作系统，我给你个程序，用户想运行它，然后操作系统就按照上面的流程<br>为它创建一个进程。这是不是类似于父子关心呢？我们双击的那个程序运行后的进程就是桌面这个进程的孩子。其实现在的操作系统创建进程就是通过父进程创建子进程的方式新建进程，子进程也可以创建其他进程，这样就形成了一个<code>进程树</code>。<br>到了这里你可能会想到操作系统的第一个进程是谁，又是谁创建的呢？这个可以看一下进程上的PID（进程唯一标识）为1的那个就是。Linux上（运行<code>ps -el</code>命令），有一些发行版本是<code>systemd</code>,还有一些发行版本是<code>init</code>。之后所有的进程都是他们创建的（在Linux下<code>任务</code>等同于<code>进程</code>）。作为开发者，本质也是一样的。在Linux上，是使用代码调用系统调用接口<code>fork</code>函数和<code>exec</code>函数。在Windows上，使用<code>CreateProcess</code>函数。</p>
 <p>Windows下CreateProcess函数示例：</p>
-<pre class="line-numbers language-C"><code class="language-C">#include <stdio.h>
-#include <windows.h>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;windows.h></span></span>
 
-int main() {
-    STARTUPINFO si;
-    PROCESS_INFORMATION pi;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    STARTUPINFO si<span class="token punctuation">;</span>
+    PROCESS_INFORMATION pi<span class="token punctuation">;</span>
 
-    /* 申请内存 */
-    ZeroMemory(&si, sizeof(si));
-    si.cb = sizeof(si);
-    ZeroMemory(&pi, sizeof(pi));
+    <span class="token comment" spellcheck="true">/* 申请内存 */</span>
+    <span class="token function">ZeroMemory</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>si<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>si<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    si<span class="token punctuation">.</span>cb <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>si<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ZeroMemory</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pi<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>pi<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /* 创建子进程 */
-    if (!CreateProcess(
-            NULL, // 应用程序名称
-            "C:\\WINDOWS\\system32\\mspaint.exe", // 命令，即要运行的程序，这里是打开画板
-            NULL, // 不继承进程句柄（process handle）
-            NULL, // 不继承线程句柄（thread handle）
-            FALSE, // 禁用句柄继承
-            0, // 不适用创建标志
-            NULL, // 不使用父进程的已有环境块
-            NULL, // 不使用父进程的启动目录
-            &si, // 设置新进程的一些特性，比如窗口大小，颜色等
-            &pi // 创建新进程以及其线程的句柄和标识符
-            )){
-        fprintf(stderr, "Create Process Failed");
-        return -1;
-    }
+    <span class="token comment" spellcheck="true">/* 创建子进程 */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">CreateProcess</span><span class="token punctuation">(</span>
+            <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 应用程序名称</span>
+            <span class="token string">"C:\\WINDOWS\\system32\\mspaint.exe"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 命令，即要运行的程序，这里是打开画板</span>
+            <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 不继承进程句柄（process handle）</span>
+            <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 不继承线程句柄（thread handle）</span>
+            FALSE<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 禁用句柄继承</span>
+            <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 不适用创建标志</span>
+            <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 不使用父进程的已有环境块</span>
+            <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 不使用父进程的启动目录</span>
+            <span class="token operator">&amp;</span>si<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 设置新进程的一些特性，比如窗口大小，颜色等</span>
+            <span class="token operator">&amp;</span>pi <span class="token comment" spellcheck="true">// 创建新进程以及其线程的句柄和标识符</span>
+            <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"Create Process Failed"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 父进程等待子进程结束
-    WaitForSingleObject(pi.hProcess, INFINITE);
-    printf("Child Complete");
+    <span class="token comment" spellcheck="true">// 父进程等待子进程结束</span>
+    <span class="token function">WaitForSingleObject</span><span class="token punctuation">(</span>pi<span class="token punctuation">.</span>hProcess<span class="token punctuation">,</span> INFINITE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Child Complete"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 关闭句柄（释放内存）
-    CloseHandle(pi.hProcess);
-    CloseHandle(pi.hThread);
-    return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token comment" spellcheck="true">// 关闭句柄（释放内存）</span>
+    <span class="token function">CloseHandle</span><span class="token punctuation">(</span>pi<span class="token punctuation">.</span>hProcess<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">CloseHandle</span><span class="token punctuation">(</span>pi<span class="token punctuation">.</span>hThread<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Linux下的使用：</p>
-<pre class="line-numbers language-C"><code class="language-C">#include<stdio.h>
-#include<stdlib.h>
-#include<sys/types.h>
-#include<unistd.h>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
 
-int main(){
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 
-    // 存储子进程id
-    pid_t     pid;
+    <span class="token comment" spellcheck="true">// 存储子进程id</span>
+    pid_t     pid<span class="token punctuation">;</span>
 
-    // 复制当前进程来创建子进程
-    pid = fork();
+    <span class="token comment" spellcheck="true">// 复制当前进程来创建子进程</span>
+    pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    if(pid == -1){  // 创建失败
-        fprintf(stderr,"Fork Failed\n");
-        exit(-1);
-    } else if(pid == 0){ // 如果是子进程
-        // 子进程执行逻辑
-         printf("Child Process Running....\n");
-         // 使用一个新程序取代自身
-         execlp("/bin/ls", "ls", NULL);
-    } else { // 父进程逻辑
+    <span class="token keyword">if</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 创建失败</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span><span class="token string">"Fork Failed\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 如果是子进程</span>
+        <span class="token comment" spellcheck="true">// 子进程执行逻辑</span>
+         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Child Process Running....\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">// 使用一个新程序取代自身</span>
+         <span class="token function">execlp</span><span class="token punctuation">(</span><span class="token string">"/bin/ls"</span><span class="token punctuation">,</span> <span class="token string">"ls"</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 父进程逻辑</span>
 
-        // 父进程等待子进程执行完成
-        wait(NULL);
-        printf("Child Complete.\n");
-    }
+        <span class="token comment" spellcheck="true">// 父进程等待子进程执行完成</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Child Complete.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p><code>fork</code> 和 <code>exec</code>的区别：<br><code>fork</code>是复制当前进程，即执行这个函数后，会出现两个进程，这两个进程一样，不过有一个区别就是，这个函数返回给这两个进程不同的返回值用于区分不同进程。<br><code>fork</code>在父进程中返回值是子进程的PID，在子进程中返回0。<code>sub_pid = fork();</code>这个语句使创建两个进程。后面就可以根据返回值不同区分不同的进程。<br><strong>注意</strong>：<code>fork</code>创建的子进程和父进程具有相同的代码逻辑，如果没有后面的if做区分，则父子进程执行相同的代码，直到运行结束。<br><code>execlp</code>是<code>exec</code>函数系中的一个，<code>exec</code>是加载一个新的程序取代当前程序，如果代码直接执行<code>exec</code>函数，当前程序就会终止，开始执行新的代码。<br>通过<code>fork</code>和<code>exec</code>组合创建新的程序：先使用fork创建一个当前进程的复制进程，然后根据返回值在子进程中运行<code>exec</code>函数执行一个新的进程。<br>例子：比如在Shell中运行一个程序，Shell就会复制自身，然后再让那个程序代替子进程执行。</p>
 </blockquote>
