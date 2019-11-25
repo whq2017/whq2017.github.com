@@ -387,14 +387,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.9k
+                    8.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    25 分
+                    29 分
                 </div>
                 
                 
@@ -858,7 +858,48 @@ $gcc -o producer producer.c -lrt<span aria-hidden="true" class="line-numbers-row
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span>inputStreamReader<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><h2 id="线程和进程之间什么关系"><a href="#线程和进程之间什么关系" class="headerlink" title="线程和进程之间什么关系"></a>线程和进程之间什么关系</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2>
+<h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>线程，实际指的是进程中执行的一系列指令序列，是一个进程执行的实际表现；换句话说，线程就是CPU执行的指令集合的抽象，这里不包括进程的设备资源，只针对指令和数据。</p>
+<h3 id="线程和进程之间什么关系"><a href="#线程和进程之间什么关系" class="headerlink" title="线程和进程之间什么关系"></a>线程和进程之间什么关系</h3><p>从进程控制块存储的数据来看，我们可以知道进程的两个特点：</p>
+<ul>
+<li><code>资源所有权</code>: 一个进程包括一个存放进程映像的虚拟地址空间。进程映像是<code>程序</code>，<code>数据</code>， <code>栈</code>和<code>进程块中定义的属性的集合</code>。</li>
+<li><code>调度/执行</code>: 一个进程沿着通过一个或者多个程序的一条执行路径执行。一个进程具有一个执行状态和一个分配的执行级，并且是一个可被操作系统调度和分派的实体。<br>这两个特点是独立的，一个是关于进程资源的特点，一个是关于进程指令执行的特点。在现代操作系统中，为了区分这两个特点，把<code>分派(调度)的单位</code>称为<code>线程</code>或<code>轻量级进程（LWP）</code>；把拥有<code>资源所有权的单位</code>仍称为<code>进程</code>或<code>任务</code>。<blockquote>
+<p>对于操作系统多说，分配资源的单位和被保护的单位为进程。线程是被CPU执行的单位，也即是操作系统调度的单位。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="什么是多线程？和多进程的区别？"><a href="#什么是多线程？和多进程的区别？" class="headerlink" title="什么是多线程？和多进程的区别？"></a>什么是多线程？和多进程的区别？</h3><p>多道程序设计系统即是多个允许多个进程交替执行，对外可以提供一种多个程序同时执行的感觉，而这些程序之间可以没有关系，或者通过一些其他方式进行通讯，即进程通信。<br>而多线程是指在一个进程内，有多个可同时执行的指令序列。这个进程所拥有的资源，这些指令序列都可以访问，即进程内的资源，对于多线程来说是看见的（共享的），不需要通过其他方式进行通信。</p>
+<blockquote>
+<p>多线程是指操作系统在单个进程内支持多个并发执行路径的能力 — 《操作系统设计与实现精髓 P107》</p>
+</blockquote>
+<p><img src="process.png" alt="多进程交替执行"><br><img src="thread.png" alt="多线程表示"></p>
+<p>其实还有一个特别重要的概念容易混淆：</p>
+<ul>
+<li>并发：表示可以处理多个任务，但是不一定要同时。这种机制更多的是强调有切换执行单元的能力。</li>
+<li>并行：表示可以同时处理多个任务，这种机制表示由多个核心，每一个都可以在同一时刻做一件事情。</li>
+</ul>
+<h3 id="多线程模型"><a href="#多线程模型" class="headerlink" title="多线程模型"></a>多线程模型</h3><p>多线程模型是针对什么来说的呢？其针对的是<code>用户线程</code>和<code>内核线程</code>映射之间的关系。<br>上面那就话就说明了线程存在两种方法支持：在用户态下的用户线程（ULT），这种线程的调度由用户程序自身进行管理；另一种是内核态下的内核线程（LT），内核线程由内核进行管理。</p>
+<h4 id="多对一"><a href="#多对一" class="headerlink" title="多对一"></a>多对一</h4><p>多对一是指<code>多个用户线程</code>对应到一个<code>内核线程</code>上，从内核上看，本质就是内核执行一个单进程程序，按照PC指针进行执行指令，无法感知上层是无法处理指令切换等操作。这种对线程的管理是由应用程序自身管理的（或者使用线程库管理）。<br><img src="more2one.png" alt="多对一"></p>
+<p>优点：</p>
+<ul>
+<li>由用户管理线程，效率更高</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>这样的系统就是指操作系统只能对外提供一个线程，对现在多核CPU不适用</li>
+<li>如果用户程序在内核级线程阻塞时，当导致该进程其他线程也无法执行</li>
+</ul>
+<h4 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h4><p>一对一模型是指<code>一个</code>用户线程对应到<code>一个</code>内核线程。该模型可以解决一个线程阻塞时，不影响其他线程执行。<br>但是也存在一个缺点：当用户线程过多时，内核创建内核线程会使用大量性能。<br><img src="one2one.png" alt="一对一"></p>
+<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4><p>多对多模型多路复用多个用户线程到相同数量或者更少数量的内核线程。<br><img src="more2more.png" alt="多对多"></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li>线程状态和具体系统具体实现或者线程库的实现方式有关。这里不再叙述。</li>
+<li>关于PCB具体存储的数据可以查看Linux下<code>linux/sched.h</code>文件下的<code>task_struct</code>结构体。</li>
+<li>未叙述的消息通信的具体实现方式有：套接字，远程过程调用，管道</li>
+<li>线程实现可以查看<code>Pthreads</code>库，windows线程，Linux使用<code>fork</code>和<code>exec</code>创建线程。</li>
+<li>关于线程创建和销毁，以及调度程序的实现未叙述</li>
+<li>为了减少线程创建的性能消耗，可以使用<code>线程池</code>以及其他方法未叙述。</li>
+<li>对称多处理（SMP）体系结构及关于线程未叙述，可参考《操作系统精髓与设计原理》一书第4章</li>
+</ol>
+
             </div>
             <hr />
 
@@ -1449,7 +1490,7 @@ $gcc -o producer producer.c -lrt<span aria-hidden="true" class="line-numbers-row
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">9.6k</span>
+            <span class="white-color">10.9k</span>
             
 
             <br>
