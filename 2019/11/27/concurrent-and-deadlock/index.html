@@ -396,14 +396,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    2.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    10 分
                 </div>
                 
                 
@@ -499,7 +499,7 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
 </blockquote>
 <p>硬件提供的特有指令可以抽象为两种形式：<code>test_and_set()</code>,<code>compare_and_swap()</code></p>
 <blockquote>
-<p>术语介绍：忙等待或者叫自旋等待指的是进程在得到临界区访问权之前，他只能继续执行测试变量的指令来得到访问权，除此之外不能做其他事情。 —- 《操作系统精髓和设计原理 P144》</p>
+<p>术语介绍：<code>忙等待</code>或者叫<code>自旋等待</code>指的是进程在得到临界区访问权之前，他只能继续执行测试变量的指令来得到访问权，除此之外不能做其他事情。 —- 《操作系统精髓和设计原理 P144》</p>
 </blockquote>
 <p>对<code>test_and_set()</code>指令进行抽象则可以表示为：</p>
 <pre class="line-numbers language-java"><code class="language-java">
@@ -589,6 +589,18 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
 
     <span class="token comment" spellcheck="true">/* remainder section */</span>
 <span class="token punctuation">}</span> <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>硬件指令方法的特点</strong>：<br>优点：</p>
+<ul>
+<li>适用于在单处理其或共享内存的多处理器上的任何数目的进程</li>
+<li>简单且易于证明</li>
+<li>支持多个临界区，每个临界区可以用自己定义的变量定义<br>缺点：</li>
+<li>使用了忙等待，比较消耗cpu时间</li>
+<li>可能产生饥饿：当一个进程离开临界区后，其他进程再次进入是随意的，即有些进程会进入无线等待，上面最后一个实现可以解决。</li>
+<li>可能死锁：这种是在单处理器下，当一个进程获得临界区后，却被CPU让给更高优先级的进程，但是更高优先级的进程也想使用临界区，这样，一个要被执行但是无法执行，一个可以释放资源，但是没有机会释放资源，就会导致死锁问题。</li>
+</ul>
+<blockquote>
+<p><code>饥饿</code>: 指一个可运行的进程尽管能继续执行，但是被调度器无期限的忽略，而不能被调度执行的情况。<br><code>死锁</code>: 两个或者两个以上的进程因为每一个而进程都在等待其他进程做完某些事情而不能继续执行的情况。</p>
+</blockquote>
 <h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><h3 id="同步的一些问题"><a href="#同步的一些问题" class="headerlink" title="同步的一些问题"></a>同步的一些问题</h3><h4 id="缓冲问题"><a href="#缓冲问题" class="headerlink" title="缓冲问题"></a>缓冲问题</h4><h4 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h4><h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
             </div>
             <hr />
@@ -1184,7 +1196,7 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">13.4k</span>
+            <span class="white-color">13.7k</span>
             
 
             <br>
