@@ -396,14 +396,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.8k
+                    3.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    13 分
                 </div>
                 
                 
@@ -601,7 +601,77 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
 <blockquote>
 <p><code>饥饿</code>: 指一个可运行的进程尽管能继续执行，但是被调度器无期限的忽略，而不能被调度执行的情况。<br><code>死锁</code>: 两个或者两个以上的进程因为每一个而进程都在等待其他进程做完某些事情而不能继续执行的情况。</p>
 </blockquote>
-<h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><h3 id="同步的一些问题"><a href="#同步的一些问题" class="headerlink" title="同步的一些问题"></a>同步的一些问题</h3><h4 id="缓冲问题"><a href="#缓冲问题" class="headerlink" title="缓冲问题"></a>缓冲问题</h4><h4 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h4><h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p><code>信号量</code>是操作系统和用于提供并发性的程序设计语言的一种同步机制。即信号量是在操作系统和程序设计语言层面上为开发程序提供的一种同步机制。例如Go语言通过通道传递信号，控制另一个线程（协程）的执行。</p>
+<blockquote>
+<p>除了<code>信号量</code>外，还有互斥量，管程，条件变量，消息传递等。</p>
+</blockquote>
+<p>信号量最早是由荷兰的<code>Dijkstra</code>提出，其主要思想是：两个或者多个进程可以通过简单的信号进行合作，一个进程可以<strong>被迫</strong>在某一位置停止，直到它接受到一个特定的信号。<br>通常可把信号量看作一个具有整型数值的变量，在它之上定义三个操作：</p>
+<ul>
+<li>一个信号量可以被初始化成<strong>非负数</strong>。</li>
+<li>操作wait()最初称为P(荷兰语proberen，测试)， 其使信号量减一，如果信号量值变成负数，则执行wait()的进程被阻塞。</li>
+<li>操作signal()最初被称为V(荷兰语verhogen，增加)，其使信号量加一，如果值小于或者等于零，则被wait()操作阻塞的进程被解除阻塞。<blockquote>
+<p>wait()和signal()操作应该为一个原子操作。</p>
+</blockquote>
+</li>
+</ul>
+<p>对于信号量的解释：<br>开始时，信号量的值为0或者整数。如果该值为正数，则它的值等于发出wait()操作后可立即继续执行的进程数量。如果该值为0（或者由于<strong>初始化</strong>，或者由于有等待信号量初值的进程<strong>已经等待</strong>），则发出wait()操作的下一个进程会被阻塞，此时该信号量的值变成负数。之后，每一个后续的wait()操作都会使信号量的负值更大（即负数方向数值增大）。该数值等于正在等待解除阻塞的进程的数量。在信号量为负值的情形下，每一个signal()操作都会将等待进程中的一个进程解除阻塞。</p>
+<blockquote>
+<p>— 《操作系统精髓与设计原理》</p>
+</blockquote>
+<p>信号量的原语定义：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> semaphore<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> count<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 可用资源数</span>
+    queueType queue<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 等待资源进程的队列，直到有资源可用在从里面移除。</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span>semaphore s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 这里只是wait原语的抽象表示，所以整个函数都是原子性，即可认为`s.count --`操作也是不可分割的。</span>
+    s<span class="token punctuation">.</span>count <span class="token operator">--</span><span class="token punctuation">;</span> 
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span>count <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 把当前进程插入到队列中 */</span>
+        <span class="token comment" spellcheck="true">/* 阻塞当前进程 */</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">signal</span><span class="token punctuation">(</span>semaphore s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    s<span class="token punctuation">.</span>count<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span>count <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 把进程从队列中删除 */</span>
+        <span class="token comment" spellcheck="true">/* 把进程插入到就绪队列中 */</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="二元信号量"><a href="#二元信号量" class="headerlink" title="二元信号量"></a>二元信号量</h4><p>如果信号量的值<strong>只能</strong>是0和1，则称这样的信号量为二元信号量。</p>
+<p>由于二元信号量的取值只能是0和1，则可以使用的操作定义：</p>
+<ul>
+<li>一个二元信号量可以初始化成0或1；</li>
+<li>wait()操作检查信号的值，如果为0，则进程执行wait()就会被阻塞。如果值位1，则将值改为0，继续执行该进程；</li>
+<li>signal()操作检查是否有任何进程在该信号上受阻，如果有，那么通过signal()操作，受阻的金册灰姑娘就会被唤醒；如果没有进程受阻，那么值被设为1；</li>
+</ul>
+<p>通过上面的定义，可以定义二元信号量：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> binary_semaphore<span class="token punctuation">{</span>
+    <span class="token keyword">enum</span> <span class="token punctuation">{</span>zero<span class="token punctuation">,</span> one<span class="token punctuation">}</span> value<span class="token punctuation">;</span>
+    queueType queue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span>semaphore s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>value <span class="token operator">==</span> one<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        s<span class="token punctuation">.</span>value <span class="token operator">=</span> zero<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 把当前进程插入到队列中 */</span>
+        <span class="token comment" spellcheck="true">/* 阻塞当前进程 */</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">signal</span><span class="token punctuation">(</span>semaphore s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>queue is <span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 没有进程请求资源</span>
+        s<span class="token punctuation">.</span>value <span class="token operator">=</span> one<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 把进程从队列中删除 */</span>
+        <span class="token comment" spellcheck="true">/* 把进程插入到就绪队列中 */</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="计数信号量"><a href="#计数信号量" class="headerlink" title="计数信号量"></a>计数信号量</h4><h3 id="同步的一些问题"><a href="#同步的一些问题" class="headerlink" title="同步的一些问题"></a>同步的一些问题</h3><h4 id="缓冲问题"><a href="#缓冲问题" class="headerlink" title="缓冲问题"></a>缓冲问题</h4><h4 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h4><h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
             </div>
             <hr />
 
@@ -1196,7 +1266,7 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">13.7k</span>
+            <span class="white-color">14.7k</span>
             
 
             <br>
