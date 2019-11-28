@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>操作系统之同步与死锁</title>
+      <link href="/2019/11/27/concurrent-and-deadlock/"/>
+      <url>/2019/11/27/concurrent-and-deadlock/</url>
+      
+        <content type="html"><![CDATA[<h2 id="并发的原理"><a href="#并发的原理" class="headerlink" title="并发的原理"></a>并发的原理</h2><h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><h3 id="硬件上支持同步"><a href="#硬件上支持同步" class="headerlink" title="硬件上支持同步"></a>硬件上支持同步</h3><h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><h3 id="同步的一些问题"><a href="#同步的一些问题" class="headerlink" title="同步的一些问题"></a>同步的一些问题</h3><h4 id="缓冲问题"><a href="#缓冲问题" class="headerlink" title="缓冲问题"></a>缓冲问题</h4><h4 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h4><h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>]]></content>
+      
+      
+      <categories>
+          
+          <category> 操作系统 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 操作系统 </tag>
+            
+            <tag> 进程 </tag>
+            
+            <tag> 并发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>操作系统：进程和线程介绍</title>
       <link href="/2019/11/23/os-process-thread/"/>
       <url>/2019/11/23/os-process-thread/</url>
@@ -13,14 +42,14 @@
       
       <categories>
           
-          <category> 操纵系统 </category>
+          <category> 操作系统 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 操纵系统 </tag>
+            <tag> 操作系统 </tag>
             
             <tag> 进程 </tag>
             

@@ -4,12 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="终于要开始写博客, Java Go">
+    <meta name="keywords" content="操作系统之同步与死锁, Java Go">
     <meta name="baidu-site-verification" content>
     <meta name="google-site-verification" content>
     <meta name="360-site-verification" content>
-    <meta name="description" content="为什么说我是“终于”要开始写博客了呢？因为对于博客，我努力尝试过很多次最终的结果：现在开始写博客。这其中每次都是因为不同的想法。
-第一次想写博客是因为我从大一学会Java Web后自己想做一个博客系统然后在上面写，可惜自己前端知识特别差，那">
+    <meta name="description" content="并发的原理同步临界区硬件上支持同步互斥锁信号量同步的一些问题缓冲问题读者-写者问题哲学家就餐问题管程死锁死锁的原理死锁预防死锁避免安全状态资源分配图算法银行家算法死锁检测死锁中的问题各种系统中并发机制Unix的并发机制Linux的并发机制W">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>终于要开始写博客 | 小孩子的博客</title>
+    <title>操作系统之同步与死锁 | 小孩子的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -228,13 +227,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        终于要开始写博客
+                        操作系统之同步与死锁
                     </div>
                 </div>
             </div>
@@ -345,8 +344,16 @@
                     
                     <div class="article-tag">
                         
-                        <a href="/tags/随笔/" target="_blank">
-                            <span class="chip bg-color">随笔</span>
+                        <a href="/tags/操作系统/" target="_blank">
+                            <span class="chip bg-color">操作系统</span>
+                        </a>
+                        
+                        <a href="/tags/进程/" target="_blank">
+                            <span class="chip bg-color">进程</span>
+                        </a>
+                        
+                        <a href="/tags/并发/" target="_blank">
+                            <span class="chip bg-color">并发</span>
                         </a>
                         
                     </div>
@@ -357,8 +364,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                        <a href="/categories/随笔/" class="post-category" target="_blank">
-                            随笔
+                        <a href="/categories/操作系统/" class="post-category" target="_blank">
+                            操作系统
                         </a>
                         
                     </div>
@@ -369,7 +376,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-11-22
+                    2019-11-27
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -383,14 +390,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    828
+                    115
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
                 
@@ -406,11 +413,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>为什么说我是“终于”要开始写博客了呢？因为对于博客，我努力尝试过很多次最终的结果：现在开始写博客。这其中每次都是因为不同的想法。</p>
-<p>第一次想写博客是因为我从大一学会Java Web后自己想做一个博客系统然后在上面写，可惜自己前端知识特别差，那当时看到CSS就头痛，更没用过相关的框架，努力了一些Bootstrap框架后就放弃了，然后使用了有道云笔记。<br>第二次想写博客是因为在一个群里，群主要举办一个活动，然后想参加互动必须要准备一个博客，我就草草的准备了一个。之后想再上面写点东西，发现自己不知道写什么，也不知道自己有什么可以写的。不久之后也就忘了。<br>之后也有很多次想过，想的时候感觉自己可以做好，但是总以失败告终；比如想在掘金上写一点东西，自己开始写的时候，总是发现自己以为懂的东西，给别人将却讲不出来……</p>
-<p>为什么今天我又开始，这次会不会又再次放弃呢？说实话，我也不知道，只是最近读了一些书，回想了过去大学三年，想了想这三年我学过的知识，用过的技术，才发现我什么都没有留下了，能做的不过是接别人的话，顺势装个x。所以，我现在开始想写博客原因有三个，其一：我要现在开始准备为我的毕业做“总复习”，把以后找工作的知识点，以前用过的技术，总体上复习一下，对使用的技术及其原理都要做一些了解，所以我要找个地方记录，没有选择使用笔记的方式而选择客是因为，我想把我所理解的知识分享出去，如果错误也希望有人可以反馈给我，不知等我用的到时候才发现；其二：我大一暑假，我当时注意到Go语言，并且开始找了一些视频学习，之后就是找了一些书看看，总体掌握的很差。也是最近几天，登录管看到biezhi大佬的<code>代码真香</code>频道，发现他的Go语言视频已经有一年没有更新过了，我就有了一个打算：边学习边录制视频交给别人。叫别人一个简单的知识点容易，但是要教一套语言使别人可以入门，要有很多课程设计，知识规划和总结，所以就想写博客，一作为自己对Go知识点的梳理，二作为Go视频中知识点的补充。这两个原因算是我开始写博客的主要原因。如果要多说一个原因，那就是，如你所见，我的文笔并不好，我也想借机练习一下。</p>
-<p>2019也快结束了，我也快要开始找工作了，只希望接下来的几个月可以好好学习知识，充实自己，做好计划的每一件事。2019亦结束，亦开始！</p>
-
+                <h2 id="并发的原理"><a href="#并发的原理" class="headerlink" title="并发的原理"></a>并发的原理</h2><h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><h3 id="硬件上支持同步"><a href="#硬件上支持同步" class="headerlink" title="硬件上支持同步"></a>硬件上支持同步</h3><h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><h3 id="同步的一些问题"><a href="#同步的一些问题" class="headerlink" title="同步的一些问题"></a>同步的一些问题</h3><h4 id="缓冲问题"><a href="#缓冲问题" class="headerlink" title="缓冲问题"></a>缓冲问题</h4><h4 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h4><h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
             </div>
             <hr />
 
@@ -444,9 +447,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《终于要开始写博客》
+                    《操作系统之同步与死锁》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/11/22/2019-start/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/11/27/concurrent-and-deadlock/" property="cc:attributionName"
                rel="cc:attributionURL">
                 吴欢庆
             </a> 采用
@@ -748,89 +751,36 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/11/22/go-install/">
+                <a href="/2019/11/27/concurrent-and-deadlock/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Golang环境安装">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="操作系统之同步与死锁">
                         
-                        <span class="card-title">Golang环境安装</span>
+                        <span class="card-title">操作系统之同步与死锁</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是为《陪着笨孩子学Go》课程第一期知识说明：Go环境的安装。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-22
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/语言学习/" class="post-category" target="_blank">
-                                    语言学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Go/" target="_blank">
-                        <span class="chip bg-color">Go</span>
-                    </a>
-                    
-                    <a href="/tags/安装/" target="_blank">
-                        <span class="chip bg-color">安装</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/11/22/2019-start/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="终于要开始写博客">
-                        
-                        <span class="card-title">终于要开始写博客</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            为什么说我是“终于”要开始写博客了呢？因为对于博客，我努力尝试过很多次最终的结果：现在开始写博客。这其中每次都是因为不同的想法。
-第一次想写博客是因为我从大一学会Java Web后自己想做一个博客系统然后在上面写，可惜自己前端知识特别差，那
+                            共享数据的并发访问可能导致数据的不一致，这就需要使用多种机制以确保数据的一致性。这些机制会不会又导致一些问题呢？
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-27
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/随笔/" class="post-category" target="_blank">
-                                    随笔
+                            <a href="/categories/操作系统/" class="post-category" target="_blank">
+                                    操作系统
                                 </a>
                             
                             
@@ -841,8 +791,69 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/随笔/" target="_blank">
-                        <span class="chip bg-color">随笔</span>
+                    <a href="/tags/操作系统/" target="_blank">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/进程/" target="_blank">
+                        <span class="chip bg-color">进程</span>
+                    </a>
+                    
+                    <a href="/tags/并发/" target="_blank">
+                        <span class="chip bg-color">并发</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/11/23/os-process-thread/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="操作系统：进程和线程介绍">
+                        
+                        <span class="card-title">操作系统：进程和线程介绍</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            这学期在学习操作系统方面的知识，自己也买了一些书籍来看，在这里根据多本书的知识总结一下，梳理一下自己的知识。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/操作系统/" class="post-category" target="_blank">
+                                    操作系统
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/操作系统/" target="_blank">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/进程/" target="_blank">
+                        <span class="chip bg-color">进程</span>
                     </a>
                     
                 </div>

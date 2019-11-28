@@ -4,11 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: Go, Java Go">
+    <meta name="keywords" content="分类: 操作系统, Java Go">
     <meta name="baidu-site-verification" content>
     <meta name="google-site-verification" content>
     <meta name="360-site-verification" content>
-    <meta name="description" content="标签: Go | 小孩子的博客">
+    <meta name="description" content="分类: 操作系统 | 小孩子的博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>标签: Go | 小孩子的博客</title>
+    <title>分类: 操作系统 | 小孩子的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -220,7 +220,7 @@
                     小孩子
                  -->
                 
-                    标签
+                    分类
                 
             </div>
 
@@ -244,67 +244,42 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
     
 
-<div id="tags" class="container chip-container">
+<div id="category-cloud" class="container chip-container">
     <div class="card">
         <div class="card-content">
             <div class="tag-title center-align">
-                <i class="fa fa-tags"></i>&nbsp;&nbsp;文章标签
+                <i class="fa fa-bookmark"></i>&nbsp;&nbsp;文章分类
             </div>
             <div class="tag-chips">
                 
                 
-                <a href="/tags/操作系统/" title="操作系统: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="操作系统" style="background-color: #F9EBEA;">操作系统
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
                 
-                
-                <a href="/tags/进程/" title="进程: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="进程" style="background-color: #F5EEF8;">进程
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/并发/" title="并发: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="并发" style="background-color: #D5F5E3;">并发
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/随笔/" title="随笔: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="随笔" style="background-color: #E8F8F5;">随笔
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Go/" title="Go: 1">
+                <a href="/categories/操作系统/" title="操作系统: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                            data-tagname="Go" style="background-color: #FEF9E7;">Go
-                        <span class="tag-length">1</span>
+                            style="background-color: #F9EBEA;">操作系统
+                        <span class="tag-length">2</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/安装/" title="安装: 1">
+                <a href="/categories/随笔/" title="随笔: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="安装" style="background-color: #F8F9F9;">安装
+                            style="background-color: #F5EEF8;">随笔
                         <span class="tag-length">1</span>
                     </span>
                 </a>
+                
+                
+                <a href="/categories/语言学习/" title="语言学习: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #D5F5E3;">语言学习
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
                 
             </div>
         </div>
@@ -316,35 +291,107 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
     <article id="articles" class="container articles">
         <div class="row tags-posts">
             
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="Go, 安装" data-aos="fade-up">
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/11/22/go-install/">
+                    <a href="/2019/11/27/concurrent-and-deadlock/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Golang环境安装">
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="操作系统之同步与死锁">
                             
-                            <span class="card-title">Golang环境安装</span>
+                            <span class="card-title">操作系统之同步与死锁</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                共享数据的并发访问可能导致数据的不一致，这就需要使用多种机制以确保数据的一致性。这些机制会不会又导致一些问题呢？
+                            
+                        </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-27
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fa fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/语言学习/" class="post-category" target="_blank">
-                                语言学习
+                                <a href="/categories/操作系统/" class="post-category" target="_blank">
+                                    操作系统
                                 </a>
                                 
                                 
                             </span>
                         </div>
                     </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/操作系统/" target="_blank">
+                            <span class="chip bg-color">操作系统</span>
+                        </a>
+                        
+                        <a href="/tags/进程/" target="_blank">
+                            <span class="chip bg-color">进程</span>
+                        </a>
+                        
+                        <a href="/tags/并发/" target="_blank">
+                            <span class="chip bg-color">并发</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/11/23/os-process-thread/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="操作系统：进程和线程介绍">
+                            
+                            <span class="card-title">操作系统：进程和线程介绍</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                这学期在学习操作系统方面的知识，自己也买了一些书籍来看，在这里根据多本书的知识总结一下，梳理一下自己的知识。
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/操作系统/" class="post-category" target="_blank">
+                                    操作系统
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/操作系统/" target="_blank">
+                            <span class="chip bg-color">操作系统</span>
+                        </a>
+                        
+                        <a href="/tags/进程/" target="_blank">
+                            <span class="chip bg-color">进程</span>
+                        </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
             
