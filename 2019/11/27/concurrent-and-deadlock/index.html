@@ -396,14 +396,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7k
+                    7.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    25 分
+                    27 分
                 </div>
                 
                 
@@ -1045,7 +1045,42 @@ semaphore x <span class="token operator">=</span> <span class="token number">1</
 </ol>
 <p>那么怎么处理死锁呢？造成死锁的必须条件又是什么？</p>
 <hr>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
+<hr>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>操作系统引入了多进程或多线程运行，导致资源的不能合理使用，有引入了同步手段使多进程或多线程之间合作，控制对资源的访问。但是使用同步中，我们也发现了会产生两个问题：<code>死锁</code>、<code>饥饿</code>。</p>
+<ol>
+<li>死锁：一组相互竞争系统资源或进程通信的进程间的“永久”阻塞。</li>
+<li>饥饿：指一个可运行的进程始终得不到CPU资源，导致无法运行。</li>
+</ol>
+<h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><p>当一组进程内的每一个进程偶的在等待一个事件，而这个事件只能由这组进程中的另一个进程引起，那么这组进程就处于死锁状态。</p>
+<p>在正常情况下，一个进程使用资源的步骤：</p>
+<ol>
+<li>向操作系统申请，如果资源被其他进程占用，则申请的进程一直处于等待，直到获得该资源</li>
+<li>使用资源</li>
+<li>释放资源<blockquote>
+<p>资源通常可以分为：</p>
+<ul>
+<li>可重用资源：指一次只能提供一个进程使用，并且不会由于使用而耗尽的资源</li>
+<li>可消耗资源：指可以被创建（生产）和销毁（消耗）的资源</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p>但是当有进程申请的资源一直得不到则就进入了死锁。<br>例如：一个系统有一台打印机和一个DVD驱动器，假如进程A占用DVD驱动器而进程B占用打印机。如果进程A申请打印机而进程B申请DVD驱动器，那么这就产生了死锁。</p>
+<p>死锁产生需要什么条件呢？通过之前的例子，可得出：</p>
+<ul>
+<li>互斥：一次只能一个进程使用，其他进程只能等待该进程使用完成才可以在使用。</li>
+<li>占有且等待：一个进程占有一个资源，并且等待另一个资源，而该资源被其他进程占有。</li>
+<li>不可抢占：资源不能被强制让出，只能由拥有该资源的进程主动释放。</li>
+<li>循环等待：存在一个封闭的进程链，这个链中的每一个进程至少占有此链中下一个进程所需的一个资源。<blockquote>
+<p>第四个条件<code>循环等待</code>其实暗含了在了<code>占有并等待</code>中，换句话说，其实前三个条件就直接导致了第四个条件的成立，即第四个条件不可解。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>上面的四个条件是造成死锁的充分必要条件。</p>
+</blockquote>
+<p>怎么描述死锁呢？通常都是通过一个称为<code>系统资源分配图</code>的<code>有向图</code>表示。<br><img src="res.png" alt="系统资源分配图"><br><img src="deadlock_res.png" alt="发生死锁"><br><img src="undeadlock_res.png" alt="不发生死锁"></p>
+<h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
             </div>
             <hr />
 
@@ -1640,7 +1675,7 @@ semaphore x <span class="token operator">=</span> <span class="token number">1</
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">17.9k</span>
+            <span class="white-color">18.5k</span>
             
 
             <br>
