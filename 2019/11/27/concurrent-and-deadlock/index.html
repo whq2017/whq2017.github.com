@@ -233,7 +233,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -396,14 +396,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.8k
+                    7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    13 分
+                    25 分
                 </div>
                 
                 
@@ -640,14 +640,14 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
         <span class="token comment" spellcheck="true">/* 把进程插入到就绪队列中 */</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="二元信号量"><a href="#二元信号量" class="headerlink" title="二元信号量"></a>二元信号量</h4><p>如果信号量的值<strong>只能</strong>是0和1，则称这样的信号量为二元信号量。</p>
+<h4 id="二元信号量"><a href="#二元信号量" class="headerlink" title="二元信号量"></a>二元信号量</h4><p>如果信号量的值<strong>只能</strong>是0和1，则称这样的信号量为二元信号量。除了二元信号量外的信号量称为<code>计数信号量</code>或者<code>一般信号量</code>。</p>
 <p>由于二元信号量的取值只能是0和1，则可以使用的操作定义：</p>
 <ul>
 <li>一个二元信号量可以初始化成0或1；</li>
 <li>wait()操作检查信号的值，如果为0，则进程执行wait()就会被阻塞。如果值位1，则将值改为0，继续执行该进程；</li>
 <li>signal()操作检查是否有任何进程在该信号上受阻，如果有，那么通过signal()操作，受阻的金册灰姑娘就会被唤醒；如果没有进程受阻，那么值被设为1；</li>
 </ul>
-<p>通过上面的定义，可以定义二元信号量：</p>
+<p>通过上面的定义，我们可以定义二元信号量原语：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> binary_semaphore<span class="token punctuation">{</span>
     <span class="token keyword">enum</span> <span class="token punctuation">{</span>zero<span class="token punctuation">,</span> one<span class="token punctuation">}</span> value<span class="token punctuation">;</span>
     queueType queue<span class="token punctuation">;</span>
@@ -671,7 +671,380 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
         <span class="token comment" spellcheck="true">/* 把进程插入到就绪队列中 */</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="计数信号量"><a href="#计数信号量" class="headerlink" title="计数信号量"></a>计数信号量</h4><h3 id="同步的一些问题"><a href="#同步的一些问题" class="headerlink" title="同步的一些问题"></a>同步的一些问题</h3><h4 id="缓冲问题"><a href="#缓冲问题" class="headerlink" title="缓冲问题"></a>缓冲问题</h4><h4 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h4><h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
+<p>还有一个点，就是信号量的阻塞队列的问题：进程按照什么顺序从队列中移除？<br>最公平的最简单的方式就是<code>先进先出(FIFO)</code>，我们把使用这个策略的信号量称为<code>强信号量</code>;如果没有规定进程从队列中移除顺序，则称为<code>弱信号量</code>，这种弱信号可能会产生<code>饥饿</code>，而强信号量则不会。</p>
+<h4 id="信号量的使用–互斥"><a href="#信号量的使用–互斥" class="headerlink" title="信号量的使用–互斥"></a>信号量的使用–互斥</h4><p>这是使用上面的wait()和signal()原语保持进程的互斥，这种可以设置允许多个进程同时访问（当存在多个资源时），对于资源已经没有的情况下，则wait()的进程被阻塞，直到signal()的唤醒。</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">const</span> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 进程数</span>
+semaphore s <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span>count<span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">// 定义的资源个数</span>
+    <span class="token punctuation">.</span>queue<span class="token operator">=</span> <span class="token function">newQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 阻塞队列</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">P</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 临界区</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 剩余区</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">parbegin</span><span class="token punctuation">(</span><span class="token function">P</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">P</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">,</span> <span class="token function">P</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="信号量的使用–生产者-消费者问题"><a href="#信号量的使用–生产者-消费者问题" class="headerlink" title="信号量的使用–生产者/消费者问题"></a>信号量的使用–生产者/消费者问题</h4><p>并发中最常见的一个问题就是<code>生产者/消费者问题</code>：有一个或者多个生产者生产某种类型的数据，并放置在缓冲区中；有一个消费者从缓冲区中取数据，每次取一项。<br>这个问题的本质就是对缓冲区的控制：</p>
+<ul>
+<li>缓冲区为空时，消费者不能从中移走数据</li>
+<li>缓冲区满时，生产者不能继续向其中添加数据</li>
+</ul>
+<p>对于缓冲区可分为两种方式：</p>
+<ul>
+<li>使用二元信号量或计数信号量控制的无线缓冲区</li>
+<li>使用计数信号量控制的有限缓冲区</li>
+</ul>
+<p>使用二元信号量解决无限缓冲区的生产者/消费者问题：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> n<span class="token punctuation">;</span>
+binary_semaphore s<span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> delay <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">producer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 生产一个数据</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 防止其他进程</span>
+        <span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 临界区，设置数据</span>
+        n<span class="token operator">++</span> <span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token function">signal</span><span class="token punctuation">(</span>delay<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 当n为0时，消费者被阻塞，这里是判断消费者是否被阻塞。如果阻塞则唤醒消费者</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 退出临界区 </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">consumer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> m<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 局部变量</span>
+    <span class="token function">wait</span><span class="token punctuation">(</span>delay<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 判断是否有数据可以被处理</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 设置临界区</span>
+        <span class="token function">take</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 取出数据</span>
+        n <span class="token operator">--</span> <span class="token punctuation">;</span> 
+        m <span class="token operator">=</span> n<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 防止生产者改变</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这里退出了临界区，如果不设置m=n的话，那么下面使用的n可能就会被生产者改变</span>
+        <span class="token function">consume</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 消费数据</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>m <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token function">signal</span><span class="token punctuation">(</span>delay<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果发现数据已经没有的话，则进入阻塞 </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    n <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">parbegin</span><span class="token punctuation">(</span>producer<span class="token punctuation">,</span> consumer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用计数信号量解决无限缓冲区的生产者/消费者问题：</p>
+<pre class="line-numbers language-c"><code class="language-c">semaphore n <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> s <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">producer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 记录生产的数据个数 </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">consumer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 判断是否有数据可以被消费,如果可以被消费，则计数减一，否则阻塞等待</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">take</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">consume</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">parbegin</span><span class="token punctuation">(</span>producer<span class="token punctuation">,</span> consumer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用计数信号量解决有限缓冲区的生产者/消费者问题：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">const</span> <span class="token keyword">int</span> sizeOfBuffer <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 缓冲区大小</span>
+semaphore s <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> n <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> e <span class="token operator">=</span> sizeOfBuffer<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">producer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 增加缓冲区使用的个数</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+        <span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 结束临界区</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 设置生产的数据个数</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">producer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 消费一个数据,如果为0，则阻塞</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+        <span class="token function">take</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 减少缓冲区使用的个数</span>
+        <span class="token function">consume</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">parbegin</span><span class="token punctuation">(</span>producer<span class="token punctuation">,</span> consumer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="信号量的使用–信号量的实现"><a href="#信号量的使用–信号量的实现" class="headerlink" title="信号量的使用–信号量的实现"></a>信号量的使用–信号量的实现</h4><p>信号量的本质就是<code>互斥</code>：任何时候只能有一个进程可以操作<code>wait</code>和<code>signal</code>，而<code>wait</code>和<code>signal</code>的操作实现不许保证是<strong>原子原语实现</strong>，即类似于一条指令，一旦调用，必须执行完成，不能执行期间中断。<br>对于这，最简单的方案就是使用<strong>硬件或固件</strong>实现。如果使用软件实现，则可以考虑<code>Dekker算法</code>或者<code>Peterson算法</code>;</p>
+<p>使用硬件支持的方式有：CAS类指令或者中断禁用的方式。</p>
+<p>CAS指令代码举例：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">compare_and_swap</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>flag<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 不做任何事情 </span>
+    <span class="token punctuation">}</span>
+
+    s<span class="token punctuation">.</span>count <span class="token operator">--</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 减少信号量</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>count <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 进程进入s.queue队列 */</span>
+        <span class="token comment" spellcheck="true">/* 阻塞该进程 */</span>
+    <span class="token punctuation">}</span>
+    s<span class="token punctuation">.</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">compare_and_swap</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>flag<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* 不做任何事情  */</span>
+    <span class="token punctuation">}</span>
+    s<span class="token punctuation">.</span>count <span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 增加信号量，即释放资源</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>count <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 从s.queue队列中移除进程 */</span>
+        <span class="token comment" spellcheck="true">/* 进程进入就绪队列 */</span>
+    <span class="token punctuation">}</span>
+    s<span class="token punctuation">.</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>中断方式类似上面：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 禁用中断</span>
+
+    s<span class="token punctuation">.</span>count <span class="token operator">--</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 减少信号量</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>count <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 进程进入s.queue队列 */</span>
+        <span class="token comment" spellcheck="true">/* 阻塞该进程 */</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 允许中断</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">signal</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 禁用中断</span>
+
+    s<span class="token punctuation">.</span>count <span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 增加信号量，即释放资源</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>count <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* 从s.queue队列中移除进程 */</span>
+        <span class="token comment" spellcheck="true">/* 进程进入就绪队列 */</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 允许中断</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><p>什么是管程？我的理解就是防止开发人员错误使用信号量等方式而导致程序出现问题的一种手段。比如，信号量的wait和signal的调用，如果存在一个程序只调用wait但是不调用signal则程序就会出现问题。<br>为了防止上面的情况发生就产生了<code>管程</code>：资源的请求和释放，以及进程的阻塞都有管程处理，开发人员只需要在管程内写临界区代码就可以了。</p>
+<p><img src="monitor.png" alt="管程示意图"><br>管程是由一个或多个进程、初始化序列和局部数据组成的<strong>软件模块</strong>,主要特点：</p>
+<ul>
+<li>局部变量只能被管程的过程访问，任何外部过程够不可以访问</li>
+<li>一个进程通过管程的一个过程进入管程</li>
+<li>在任何时候，只能一个进程在管程中执行，调用管程的任何其他进程都被阻塞，以等待管程可用。<blockquote>
+<p>管程类型属于ADT类型，提供一组由程序员定义的，在管程内互斥的操作。 — 《操纵系统概念 P189》</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>一个很好的管程例子就是Java的同步：synchronized修饰的同步块。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="java_monitor.png" alt="反编译Example"></p>
+</blockquote>
+<h3 id="同步的一些问题"><a href="#同步的一些问题" class="headerlink" title="同步的一些问题"></a>同步的一些问题</h3><p>这里介绍一些常见的同步问题：缓冲区相关的生产者消费者问题，读者/写者问题和哲学家问题。</p>
+<h4 id="生产者-消费者问题"><a href="#生产者-消费者问题" class="headerlink" title="生产者-消费者问题"></a>生产者-消费者问题</h4><p>关于使用信号量处理的这类问题可以看上面关于信号量的介绍，这里说一下关于使用管程。</p>
+<p>管程类型中定义初始化块，函数。</p>
+<p>管程定义：</p>
+<pre class="line-numbers language-c"><code class="language-c">monitor boundedbuffer<span class="token punctuation">;</span>
+<span class="token keyword">char</span> buffer <span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// 分配N个数据项空间</span>
+<span class="token keyword">int</span> nextin<span class="token punctuation">,</span> nextout<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 缓冲区指针</span>
+<span class="token keyword">int</span> count<span class="token punctuation">;</span>           <span class="token comment" spellcheck="true">// 缓冲区中的数据项个数</span>
+cond notfull<span class="token punctuation">,</span> notempty<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 为同步设置的条件变量,条件成立才可进入到管程中</span>
+
+<span class="token keyword">void</span> <span class="token function">append</span><span class="token punctuation">(</span><span class="token keyword">char</span> x<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>count <span class="token operator">==</span> N<span class="token punctuation">)</span> <span class="token function">wait</span><span class="token punctuation">(</span>notfull<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 缓冲区满，阻塞等待消费</span>
+    buffer<span class="token punctuation">[</span>nextin<span class="token punctuation">]</span> <span class="token operator">=</span> x<span class="token punctuation">;</span>
+    nextin <span class="token operator">=</span> <span class="token punctuation">(</span>nextin <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> N<span class="token punctuation">;</span>
+    count <span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token function">signal</span><span class="token punctuation">(</span>notempty<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 释放任何一个等待消费的进程</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">take</span><span class="token punctuation">(</span><span class="token keyword">char</span> x<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token function">wait</span><span class="token punctuation">(</span>notempty<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 缓冲区空，阻塞等待</span>
+    x <span class="token operator">=</span> buffer<span class="token punctuation">[</span>nextout<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    nextout <span class="token operator">=</span> <span class="token punctuation">(</span>nextout <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> N<span class="token punctuation">;</span>
+    count <span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token function">signal</span><span class="token punctuation">(</span>notfull<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 释放任何一个等待添加数据的进程</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 缓冲区初始化为空</span>
+    nextin <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    nextout <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>管程的使用：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">producer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">char</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">produce</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">append</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">consumer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">char</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">take</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">consumer</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">parbegin</span><span class="token punctuation">(</span>producer<span class="token punctuation">,</span> consumer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h4><p>生产者-消费者问题是两者的操作都会对数据产生影响，而读者-写者问题中，读者不会对共享数据产生影响，只有写操作会产生影响的同步模型。<br>读者-写者问题定义：有一个多进程共享的数据区，这个数据区可以是一个文件或者一块内存空间，或者是一组寄存器。对于这个数据区，可以允许多个进程同时读取里面的数据，但是只能同步操作数据。<br>即成立的条件：</p>
+<ul>
+<li>任意多的读进程可同时读共享数据区</li>
+<li>一次只有一个写进程可以写共享数据区</li>
+<li>如果一个写进程正在写文件，禁止任何读进程读文件</li>
+</ul>
+<p>从上可以分出来两个问题：当读写进程同时到来时，实现读取数据，还是先写数据。</p>
+<ol>
+<li>读者优先</li>
+</ol>
+<p>这种情况是当有读写进程时，写进程先等待所有的读进程就绪后再操作。这种其实可能会导致写进程进入饥饿状态。<br>使用信号量的实现方式：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> readcount<span class="token punctuation">;</span>
+semaphore x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> wsem <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// wsem 信号量是否有写进程已经在访问共享数据区</span>
+
+<span class="token keyword">void</span> <span class="token function">readder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+        readcount <span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 增加一个读进程</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>readcount <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> 
+            <span class="token function">wait</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果有进程正在写，则等待，否则设置不允许进程写</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">READUNIT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 读取资源</span>
+
+        <span class="token function">wait</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+        readcount <span class="token operator">--</span> <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 表示一个读进程结束</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>readcount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> 
+            <span class="token function">signal</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果没有进程读，则唤醒释放写信号，可以让写进程获取资源</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">writer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 开始写时，请求资源，如果没有进程在读，则可以直接进入写，则否阻塞</span>
+        <span class="token function">WRITEUNIT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    readcount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">parbegin</span><span class="token punctuation">(</span>reader<span class="token punctuation">,</span> writer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>写者优先</li>
+</ol>
+<p>写着优先保证了当一个进程写时，其他读进程都必须阻塞，等待写操作完成后才可以再读取。<br>使用信号量的实现方式：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> readcount<span class="token punctuation">,</span> writecount<span class="token punctuation">;</span>
+semaphore x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> z <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> 
+        wsem <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 写信号，当其他进程在读些时，阻塞等待 </span>
+        rsem <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 读信号，用于当写操作时，阻塞读进程</span>
+
+<span class="token keyword">void</span> <span class="token function">reader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+            <span class="token function">wait</span><span class="token punctuation">(</span>rsem<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 当写进程正在执行时，读进程不能读取，在这里阻塞</span>
+                <span class="token function">wait</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+                    readcount<span class="token operator">++</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 添加一个读进程</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span>readcount <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+                        <span class="token function">wait</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果存在读进程开始读取时，设置写进程不能执行</span>
+                <span class="token function">signal</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">signal</span><span class="token punctuation">(</span>rsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 释放共享区的资源，可以让写进程进入执行</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">READUNIT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">wait</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+            readcount<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>readcount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token function">signal</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 当没有读进程后，释放请求，可以让写进程执行</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">writer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+            writecount<span class="token operator">++</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 增加一个写进程</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>readcount <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token function">wait</span><span class="token punctuation">(</span>rsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果存在进程在读，则等待，否则则阻塞所有读进程执行</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">wait</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 阻塞其他写进程执行</span>
+        <span class="token function">WRITEUNIT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>wsem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">wait</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 临界区</span>
+            writecount <span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 减少写进程</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>writecount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token function">signal</span><span class="token punctuation">(</span>rsem<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果没有写进程，则释放资源，让资源给读进程</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    readcount <span class="token operator">=</span> writecount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">parbegin</span><span class="token punctuation">(</span>reader<span class="token punctuation">,</span> writer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的信号情况可为：<br>| 系统中的进程状态 |  信号情况 |<br>|:–|:–|<br>|系统中只有读进程 | 设置wsem、没有队列 |<br>|系统中只有写进程 | 设置wsem和rsem、写进程在wsem上排队 |<br>|既有读进程，又有写进程，但读者优先 | 由读进程设置wsem、有写进程设置rsem、所有写进程在wsem上排队、一个读进程在rsem上排队、其他读进程在z上排队 |<br>|既有读进程，又有写进程，但写者优先 | 由写进程设置wsem、由写进程设置rsem、写进程在wsem上排队、一个读进程在rsem上排队、其他读进程在z上排队 |</p>
+<blockquote>
+<p>对于读者-写者问题也可以使用消息传递的方式解决。</p>
+</blockquote>
+<h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><p>哲学家就餐问题针对的是<code>多进程之间分配多个资源，并且不会出现死锁和饥饿</code>的同步模型。<br>具体描述：5个哲学家，他们的生活只有思考和吃饭。他们共用一个圆桌，每一位都有一把椅子。在桌子中央有<strong>一碗米饭</strong>，在桌子上有<strong>5根筷子</strong>。当一位哲学家思考时，他与其他同时不交流。当他感觉饥饿时，拿起与他相近的两根筷子（筷子在他左边和右边）。一个哲学家只能一次拿起一个筷子，而且不能从别人手里拿筷子。当一个饥饿的哲学家同时拥有两根筷子时就可以吃，吃完后，放下筷子并开始思考。</p>
+<p><img src="philosophers_problem.png" alt="哲学家问题图示"></p>
+<blockquote>
+<p>图来源于：由Benjamin D. Esham / Wikimedia Commons，CC BY-SA 3.0，<a href="https://commons.wikimedia.org/w/index.php?curid=56559" target="_blank" rel="noopener">https://commons.wikimedia.org/w/index.php?curid=56559</a></p>
+</blockquote>
+<p>一个简单的解决方法就是每一个筷子使用一个信号量，当一个哲学家左右两边的筷子（信号）都是可用时，则它就可以吃饭了。</p>
+<pre class="line-numbers language-c"><code class="language-c">semaphore chopstick<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">eat</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">do</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 思考</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>chopstick<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span>chopstick<span class="token punctuation">[</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 吃饭</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>chopstick<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">signal</span><span class="token punctuation">(</span>chopstick<span class="token punctuation">[</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 思考</span>
+    <span class="token punctuation">}</span><span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其实这种方案还是存在一些问题：</p>
+<ol>
+<li>相邻的两个人不能吃饭</li>
+<li>有可能导致死锁：当五个人都拿起筷子，则每一个都等待别人释放另一个筷子，这就造成了死锁。</li>
+</ol>
+<p>那么怎么处理死锁呢？造成死锁的必须条件又是什么？</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的原理"><a href="#死锁的原理" class="headerlink" title="死锁的原理"></a>死锁的原理</h3><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><h4 id="资源分配图算法"><a href="#资源分配图算法" class="headerlink" title="资源分配图算法"></a>资源分配图算法</h4><h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
             </div>
             <hr />
 
@@ -1018,7 +1391,7 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="操作系统之同步与死锁">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="操作系统之同步与死锁">
                         
                         <span class="card-title">操作系统之同步与死锁</span>
                     </div>
@@ -1076,7 +1449,7 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="操作系统：进程和线程介绍">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="操作系统：进程和线程介绍">
                         
                         <span class="card-title">操作系统：进程和线程介绍</span>
                     </div>
@@ -1266,7 +1639,7 @@ counter <span class="token operator">=</span> <span class="token keyword">regist
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">14.7k</span>
+            <span class="white-color">17.9k</span>
             
 
             <br>
