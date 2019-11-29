@@ -1107,7 +1107,39 @@ semaphore x <span class="token operator">=</span> <span class="token number">1</
 <li>如果一个进程增加的资源请求会导致死锁，则不允许分配。</li>
 </ul>
 <h4 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h4><p><code>安全状态</code>，是指系统能按某种进程推进顺序( P1, P2, …, Pn)，为每个进程Pi分配其所需资源，直至满足每个进程对资源的最大需求，使每个进程都可顺序地完成。此时称 P1, P2, …, Pn 为<code>安全序列</code>。如果系统无法找到一个安全序列，则称系统处于<code>不安全状态</code>。</p>
-<p>例子：假设系统中有三个进程P1、P2和P3,共有12 台磁带机。进程P1总共需要10台磁带机，P2和P3 分别需要4台和9台。假设在T0时刻，进程P1、P2 和P3已分别获得5合、2台和2台，尚有3台未分配，见下表<br>| 进程 | 最大需求 | 当前需求 | 还需 | 可用 |<br>| :– | :– | :– | :– | :– |<br>| P1 | 10 | 5 | 5 | 3 |<br>| P2 | 4 | 2 | 2 | |<br>| P3 | 9 | 2 | 7 | |</p>
+<p>例子：假设系统中有三个进程P1、P2和P3,共有12 台磁带机。进程P1总共需要10台磁带机，P2和P3 分别需要4台和9台。假设在T0时刻，进程P1、P2 和P3已分别获得5合、2台和2台，尚有3台未分配，见下表</p>
+<table>
+<thead>
+<tr>
+<th align="left">进程</th>
+<th align="left">最大需求</th>
+<th align="left">当前需求</th>
+<th align="left">还需</th>
+<th align="left">可用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">P1</td>
+<td align="left">10</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">P2</td>
+<td align="left">4</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">P3</td>
+<td align="left">9</td>
+<td align="left">2</td>
+<td align="left">7</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
 <p>解题：</p>
 <ol>
 <li>刚开始时，系统给三个进程分配完当前需求，则还剩3个资源可用。</li>
