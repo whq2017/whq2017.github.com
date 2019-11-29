@@ -396,14 +396,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.9k
+                    9.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    32 分
+                    35 分
                 </div>
                 
                 
@@ -1155,7 +1155,59 @@ semaphore x <span class="token operator">=</span> <span class="token number">1</
 </li>
 <li>安全序列为P2, P1, P3。则只要操作系统按照这个安全序列执行就可以正常执行。</li>
 </ol>
-<h4 id="资源分配图算法（银行家算法）"><a href="#资源分配图算法（银行家算法）" class="headerlink" title="资源分配图算法（银行家算法）"></a>资源分配图算法（银行家算法）</h4><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><h3 id="死锁中的问题"><a href="#死锁中的问题" class="headerlink" title="死锁中的问题"></a>死锁中的问题</h3><h3 id="各种系统中并发机制"><a href="#各种系统中并发机制" class="headerlink" title="各种系统中并发机制"></a>各种系统中并发机制</h3><h4 id="Unix的并发机制"><a href="#Unix的并发机制" class="headerlink" title="Unix的并发机制"></a>Unix的并发机制</h4><h4 id="Linux的并发机制"><a href="#Linux的并发机制" class="headerlink" title="Linux的并发机制"></a>Linux的并发机制</h4><h4 id="Windows的并发机制"><a href="#Windows的并发机制" class="headerlink" title="Windows的并发机制"></a>Windows的并发机制</h4>
+<h4 id="银行家算法（资源分配拒绝策略）"><a href="#银行家算法（资源分配拒绝策略）" class="headerlink" title="银行家算法（资源分配拒绝策略）"></a>银行家算法（资源分配拒绝策略）</h4><p>对于每种资源类型有多个实例的资源分配系统，现在更多的是使用一种基于<code>安全状态</code>的<code>银行家算法</code>。</p>
+<p>当一个新的进程进入系统时，其应声明可能需要的每一种资源实力的最大数量，这个值不能超过系统资源的总和。<br>当用户申请一组资源时，系统应确定这些资源的分配是否会使系统处于安全状态。如果会则分配资源，否则，进程应该等待直到其他进程释放足够多的资源为止。</p>
+<p>如果要实现银行家算法则需要保存系统资源和进程的一些数据：（n为系统进程的数量，m为资源类型的种类）</p>
+<ul>
+<li><code>Available</code>：长度为m的向量，表示每一种资源的可用实例数量</li>
+<li><code>Max</code>：$n * m$矩阵，定义每一个进程的最大需求。</li>
+<li><code>Allocation</code>：$n * m$矩阵，定义每一个进程现在已经分配的每种资源类型的实例数量。</li>
+<li><code>Need</code>：$n * m$矩阵，表示每一个进程还需要的剩余资源。</li>
+</ul>
+<p>算法描述：</p>
+<ol>
+<li>令Work和Finish分别表示长度m和n的向量。对于$i= 0,1, …, n -1,$初始化$Work = Available$和$Finish[i] = false$;</li>
+<li>查找这样的$i$使其满足：<ol>
+<li>$$Finish[i] == false$$</li>
+<li>$$Need_i \leq Work$$<br>如果没有找到这样的$i$存在，则转到第4步</li>
+</ol>
+</li>
+<li>$$Work = Work + Allocation_i$$<br>$$Finish[i] = true $$<br>返回到第2步。</li>
+<li>如果对<strong>所有i</strong>，有Finish[i] = true, 那么系统处于安全状态。</li>
+</ol>
+<p>代码实现：略(<em>^_^</em>)。</p>
+<h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><p>如果一个系统不采用上面两种方式避免死锁，那么死锁可能出现，这种环境下，系统可以提供：</p>
+<ul>
+<li>一个用来检测系统环境状态从而确定是否出现死锁的算法。</li>
+<li>一个用来从死锁状态种恢复的算法。</li>
+</ul>
+<ol>
+<li>当每种资源只有单个实例的时候<br> 在这种情况下，可以通过资源分配图转化出<code>等待图</code>。然后判断是否有环，如果存在，则说明发生死锁；反之则说明不存在死锁。</li>
+<li>当每种资源可有多个实例的时候<br> 对于这，所使用的算法类似于银行家算法：<ul>
+<li><code>Available</code>：长度为m的向量，表示每一种资源的可用实例数量</li>
+<li><code>Allocation</code>：$n * m$矩阵，定义每一个进程现在已经分配的每种资源类型的实例数量。</li>
+<li><code>Request</code>：$n * m$矩阵，表示当前每个进程的每种资源的当前请求。<br>算法描述</li>
+</ul>
+<ol>
+<li>令Work和Finish分别表示长度m和n的向量。初始化$Work=Available$。对于$i= 0,1, …, n -1$,如果$Allocation_i$不为0，则$Finish[i] = false$，否则$Finish[i] = true$;</li>
+<li>查找这样的$i$使其满足：<ol>
+<li>$$Finish[i] == false$$</li>
+<li>$$Request_i \leq Work$$<br>如果没有找到这样的$i$存在，则转到第4步</li>
+</ol>
+</li>
+<li>$$Work = Work + Allocation_i$$<br>$$Finish[i] = true$$<br>返回到第2步。</li>
+<li>如果对<strong>某个i（0 &lt;= i &lt; n）</strong>，有Finish[i] = false, 那么系统死锁。而且，如果 $Finish[i] == false$,则进程$P_i$死锁。 </li>
+</ol>
+</li>
+</ol>
+<h3 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h3><p>一旦检测到死锁，常见的恢复策略有（按复杂递增）：</p>
+<ol>
+<li>取消所有死锁的进程</li>
+<li>把每个死锁进程回滚到前面定义的某个检查点，并且重启所有进程</li>
+<li>连续取消死锁进程直到不在存在死锁</li>
+<li>连续抢占资源直到不在发生死锁</li>
+</ol>
+
             </div>
             <hr />
 
@@ -1743,6 +1795,13 @@ semaphore x <span class="token operator">=</span> <span class="token number">1</
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
@@ -1750,7 +1809,7 @@ semaphore x <span class="token operator">=</span> <span class="token number">1</
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">19.8k</span>
+            <span class="white-color">20.6k</span>
             
 
             <br>
