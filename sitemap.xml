@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.whq6.top/2019/12/04/process-schedule/</loc>
+    
+    <lastmod>2019-12-04T11:21:07.026Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.whq6.top/2019/11/22/go-install/</loc>
+    
+    <lastmod>2019-12-02T10:22:58.507Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.whq6.top/2019/11/27/concurrent-and-deadlock/</loc>
     
     <lastmod>2019-11-29T12:03:00.627Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://blog.whq6.top/2019/11/23/os-process-thread/</loc>
     
     <lastmod>2019-11-27T12:12:20.841Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.whq6.top/2019/11/22/go-install/</loc>
-    
-    <lastmod>2019-11-23T11:40:30.196Z</lastmod>
     
   </url>
   

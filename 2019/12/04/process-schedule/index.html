@@ -4,12 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="终于要开始写博客, Java Go">
+    <meta name="keywords" content="进程调度算法, Java Go">
     <meta name="baidu-site-verification" content>
     <meta name="google-site-verification" content>
     <meta name="360-site-verification" content>
-    <meta name="description" content="为什么说我是“终于”要开始写博客了呢？因为对于博客，我努力尝试过很多次最终的结果：现在开始写博客。这其中每次都是因为不同的想法。
-第一次想写博客是因为我从大一学会Java Web后自己想做一个博客系统然后在上面写，可惜自己前端知识特别差，那">
+    <meta name="description" content="进程调度的基本概念单进程调度多进程调度实时调度">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>终于要开始写博客 | 小孩子的博客</title>
+    <title>进程调度算法 | 小孩子的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -228,13 +227,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        终于要开始写博客
+                        进程调度算法
                     </div>
                 </div>
             </div>
@@ -244,99 +243,10 @@
 
 
 
-<main class="post-container content">
+<main class="container content">
 
     
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 20px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
+    <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
@@ -345,8 +255,12 @@
                     
                     <div class="article-tag">
                         
-                        <a href="/tags/随笔/" target="_blank">
-                            <span class="chip bg-color">随笔</span>
+                        <a href="/tags/操作系统/" target="_blank">
+                            <span class="chip bg-color">操作系统</span>
+                        </a>
+                        
+                        <a href="/tags/进程/" target="_blank">
+                            <span class="chip bg-color">进程</span>
                         </a>
                         
                     </div>
@@ -357,8 +271,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                        <a href="/categories/随笔/" class="post-category" target="_blank">
-                            随笔
+                        <a href="/categories/操作系统/" class="post-category" target="_blank">
+                            操作系统
                         </a>
                         
                     </div>
@@ -369,7 +283,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-11-22
+                    2019-12-04
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -383,14 +297,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    828
+                    23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
                 
@@ -406,11 +320,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>为什么说我是“终于”要开始写博客了呢？因为对于博客，我努力尝试过很多次最终的结果：现在开始写博客。这其中每次都是因为不同的想法。</p>
-<p>第一次想写博客是因为我从大一学会Java Web后自己想做一个博客系统然后在上面写，可惜自己前端知识特别差，那当时看到CSS就头痛，更没用过相关的框架，努力了一些Bootstrap框架后就放弃了，然后使用了有道云笔记。<br>第二次想写博客是因为在一个群里，群主要举办一个活动，然后想参加互动必须要准备一个博客，我就草草的准备了一个。之后想再上面写点东西，发现自己不知道写什么，也不知道自己有什么可以写的。不久之后也就忘了。<br>之后也有很多次想过，想的时候感觉自己可以做好，但是总以失败告终；比如想在掘金上写一点东西，自己开始写的时候，总是发现自己以为懂的东西，给别人将却讲不出来……</p>
-<p>为什么今天我又开始，这次会不会又再次放弃呢？说实话，我也不知道，只是最近读了一些书，回想了过去大学三年，想了想这三年我学过的知识，用过的技术，才发现我什么都没有留下了，能做的不过是接别人的话，顺势装个x。所以，我现在开始想写博客原因有三个，其一：我要现在开始准备为我的毕业做“总复习”，把以后找工作的知识点，以前用过的技术，总体上复习一下，对使用的技术及其原理都要做一些了解，所以我要找个地方记录，没有选择使用笔记的方式而选择客是因为，我想把我所理解的知识分享出去，如果错误也希望有人可以反馈给我，不知等我用的到时候才发现；其二：我大一暑假，我当时注意到Go语言，并且开始找了一些视频学习，之后就是找了一些书看看，总体掌握的很差。也是最近几天，登录管看到biezhi大佬的<code>代码真香</code>频道，发现他的Go语言视频已经有一年没有更新过了，我就有了一个打算：边学习边录制视频交给别人。叫别人一个简单的知识点容易，但是要教一套语言使别人可以入门，要有很多课程设计，知识规划和总结，所以就想写博客，一作为自己对Go知识点的梳理，二作为Go视频中知识点的补充。这两个原因算是我开始写博客的主要原因。如果要多说一个原因，那就是，如你所见，我的文笔并不好，我也想借机练习一下。</p>
-<p>2019也快结束了，我也快要开始找工作了，只希望接下来的几个月可以好好学习知识，充实自己，做好计划的每一件事。2019亦结束，亦开始！</p>
-
+                <h2 id="进程调度的基本概念"><a href="#进程调度的基本概念" class="headerlink" title="进程调度的基本概念"></a>进程调度的基本概念</h2><h2 id="单进程调度"><a href="#单进程调度" class="headerlink" title="单进程调度"></a>单进程调度</h2><h2 id="多进程调度"><a href="#多进程调度" class="headerlink" title="多进程调度"></a>多进程调度</h2><h2 id="实时调度"><a href="#实时调度" class="headerlink" title="实时调度"></a>实时调度</h2>
             </div>
             <hr />
 
@@ -444,9 +354,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《终于要开始写博客》
+                    《进程调度算法》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/11/22/2019-start/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/12/04/process-schedule/" property="cc:attributionName"
                rel="cc:attributionURL">
                 吴欢庆
             </a> 采用
@@ -748,89 +658,36 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/11/22/go-install/">
+                <a href="/2019/12/04/process-schedule/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Golang环境安装">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="进程调度算法">
                         
-                        <span class="card-title">Golang环境安装</span>
+                        <span class="card-title">进程调度算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是为《陪着笨孩子学Go》课程第一期知识说明：Go环境的安装。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-22
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/语言学习/" class="post-category" target="_blank">
-                                    语言学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Go/" target="_blank">
-                        <span class="chip bg-color">Go</span>
-                    </a>
-                    
-                    <a href="/tags/安装/" target="_blank">
-                        <span class="chip bg-color">安装</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/11/22/2019-start/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="终于要开始写博客">
-                        
-                        <span class="card-title">终于要开始写博客</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            为什么说我是“终于”要开始写博客了呢？因为对于博客，我努力尝试过很多次最终的结果：现在开始写博客。这其中每次都是因为不同的想法。
-第一次想写博客是因为我从大一学会Java Web后自己想做一个博客系统然后在上面写，可惜自己前端知识特别差，那
+                            进程调度算法是操作系统对进程执行的管理以达到更好的CPU利用率或者响应。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/随笔/" class="post-category" target="_blank">
-                                    随笔
+                            <a href="/categories/操作系统/" class="post-category" target="_blank">
+                                    操作系统
                                 </a>
                             
                             
@@ -841,8 +698,69 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/随笔/" target="_blank">
-                        <span class="chip bg-color">随笔</span>
+                    <a href="/tags/操作系统/" target="_blank">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/进程/" target="_blank">
+                        <span class="chip bg-color">进程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/11/27/concurrent-and-deadlock/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="操作系统之同步与死锁">
+                        
+                        <span class="card-title">操作系统之同步与死锁</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            共享数据的并发访问可能导致数据的不一致，这就需要使用多种机制以确保数据的一致性。这些机制会不会又导致一些问题呢？
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/操作系统/" class="post-category" target="_blank">
+                                    操作系统
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/操作系统/" target="_blank">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/进程/" target="_blank">
+                        <span class="chip bg-color">进程</span>
+                    </a>
+                    
+                    <a href="/tags/并发/" target="_blank">
+                        <span class="chip bg-color">并发</span>
                     </a>
                     
                 </div>
@@ -892,103 +810,17 @@
     });
 </script>
 
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fa fa-list"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
-            headingSelector: 'h1, h2, h3, h4'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h1, h2, h3, h4').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
     
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
     <footer class="page-footer bg-color">
     <div class="container row center-align">
