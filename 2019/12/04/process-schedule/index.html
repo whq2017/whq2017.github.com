@@ -390,14 +390,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.4k
+                    5.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    20 分
                 </div>
                 
                 
@@ -585,7 +585,27 @@
 <li>每一个处理器自我调度，自我执行指令。这种称为<code>对称多处理(Symmetric MultiProcessing, SMP)</code>。</li>
 </ol>
 <h4 id="粒度"><a href="#粒度" class="headerlink" title="粒度"></a>粒度</h4><p><code>粒度</code>是指多处理器执行进程时对进程之间的同步频率。粒度大小分为5个级别：<br>| 粒度大小 | 说 明 |  同步间隔（指令） |<br>| :- | :- | :-: |<br>| 细 | 单指令流中固有的并行 | &lt;20 |<br>| 中等 | 在一个单独应用中的并发处理或者多任务处理 | 20 ~ 200 |<br>| 粗 | 在多道程序环境中并发进程的多处理 | 200 ~ 2000 |<br>| 非常粗 | 在网络节点上进行分布处理，以形成一个计算环境 | 2000 ~ 1M |<br>| 无约束 | 多个无关进程| 不适用 |</p>
-<h2 id="实时调度"><a href="#实时调度" class="headerlink" title="实时调度"></a>实时调度</h2><h3 id="最小化延迟"><a href="#最小化延迟" class="headerlink" title="最小化延迟"></a>最小化延迟</h3><h3 id="优先级调度"><a href="#优先级调度" class="headerlink" title="优先级调度"></a>优先级调度</h3><h3 id="单调速率调度"><a href="#单调速率调度" class="headerlink" title="单调速率调度"></a>单调速率调度</h3><h3 id="最早截止期限优先级调度"><a href="#最早截止期限优先级调度" class="headerlink" title="最早截止期限优先级调度"></a>最早截止期限优先级调度</h3><h3 id="比例分享调度"><a href="#比例分享调度" class="headerlink" title="比例分享调度"></a>比例分享调度</h3><h2 id="其他（忽略的问题）"><a href="#其他（忽略的问题）" class="headerlink" title="其他（忽略的问题）"></a>其他（忽略的问题）</h2><h3 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h3><h3 id="多处理的亲和性"><a href="#多处理的亲和性" class="headerlink" title="多处理的亲和性"></a>多处理的亲和性</h3><h3 id="多处理器的负载均衡"><a href="#多处理器的负载均衡" class="headerlink" title="多处理器的负载均衡"></a>多处理器的负载均衡</h3>
+<h2 id="实时调度"><a href="#实时调度" class="headerlink" title="实时调度"></a>实时调度</h2><p>实时调度是实时操作系统上对进程的调度，这类操作系统现在在嵌入式系统中使用最为广泛。<br><code>实时系统</code>根据其对于实时性要求的不同，可以分为<code>软实时</code>和<code>硬实时</code>两种类型。</p>
+<ul>
+<li>硬实时系统指系统要有确保的最坏情况下的服务时间，即对于事件的响应时间的截止期限是无论如何都必须得到满足。</li>
+<li>软实时系统就是那些从统计的角度来说，一个进程能够得到有确保的处理时间，到达系统的事件也能够在截止期限到来之前得到处理，但违反截止期限并不会带来致命的错误。</li>
+</ul>
+<blockquote>
+<p>实时系统通常做的事情就是等待一个实时事件的发生。事件可能来自软件或者硬件。/</p>
+</blockquote>
+<h3 id="最小化延迟"><a href="#最小化延迟" class="headerlink" title="最小化延迟"></a>最小化延迟</h3><p>这个算法的目的是<strong>尽可能快地响应和服务事件</strong>。通常我们把从事件发生到事件得到服务的这段时间称为<code>事件延迟</code>。<br>而<code>事件延迟</code>通常来自：<code>中断延迟</code>和<code>调度延迟</code>。</p>
+<ul>
+<li><code>中断延迟</code>：从CPU收到中断到中断处理程序开始的时间</li>
+<li><code>调度延迟</code>：调度程序从停止一个进程到启动另一个进程所需的时间量<br><img src="event.png" alt="调度延迟"></li>
+</ul>
+<h3 id="单调速率调度"><a href="#单调速率调度" class="headerlink" title="单调速率调度"></a>单调速率调度</h3><p>这个算法是解决什么问题的呢？还是看看定义吧！</p>
+<p><code>单调速率调度</code>算法采用<strong>抢占的</strong>、<strong>静态优先级</strong>的策略，调度<strong>周期性</strong>的任务。</p>
+<h3 id="最早截止期限优先级调度"><a href="#最早截止期限优先级调度" class="headerlink" title="最早截止期限优先级调度"></a>最早截止期限优先级调度</h3><h3 id="比例分享调度"><a href="#比例分享调度" class="headerlink" title="比例分享调度"></a>比例分享调度</h3><h2 id="其他（忽略的问题）"><a href="#其他（忽略的问题）" class="headerlink" title="其他（忽略的问题）"></a>其他（忽略的问题）</h2><ol>
+<li>线程调度</li>
+<li>多处理的亲和性</li>
+<li>多处理器的负载均衡</li>
+</ol>
+
             </div>
             <hr />
 
@@ -1187,7 +1207,7 @@
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">26k</span>
+            <span class="white-color">26.4k</span>
             
 
             <br>
