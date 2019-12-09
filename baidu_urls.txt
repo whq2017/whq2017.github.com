@@ -1,5 +1,5 @@
-https://blog.whq6.top/2019/12/04/process-schedule/
-https://blog.whq6.top/2019/11/27/concurrent-and-deadlock/
-https://blog.whq6.top/2019/11/23/os-process-thread/
-https://blog.whq6.top/2019/11/22/go-install/
+https://blog.whq6.top/2019/12/05/process-schedule/
+https://blog.whq6.top/2019/11/28/concurrent-and-deadlock/
+https://blog.whq6.top/2019/11/24/os-process-thread/
+https://blog.whq6.top/2019/11/23/go-install/
 https://blog.whq6.top/2019/11/22/2019-start/
