@@ -1015,7 +1015,31 @@ semaphore x <span class="token operator">=</span> <span class="token number">1</
     readcount <span class="token operator">=</span> writecount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token function">parbegin</span><span class="token punctuation">(</span>reader<span class="token punctuation">,</span> writer<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>上面的信号情况可为：<br>| 系统中的进程状态 |  信号情况 |<br>| :- | :- |<br>| 系统中只有读进程 | 设置wsem、没有队列 |<br>| 系统中只有写进程 | 设置wsem和rsem、写进程在wsem上排队 |<br>| 既有读进程，又有写进程，但读者优先 | 由读进程设置wsem、有写进程设置rsem、所有写进程在wsem上排队、一个读进程在rsem上排队、其他读进程在z上排队 |<br>| 既有读进程，又有写进程，但写者优先 | 由写进程设置wsem、由写进程设置rsem、写进程在wsem上排队、一个读进程在rsem上排队、其他读进程在z上排队 |</p>
+<p>上面的信号情况可为:</p>
+<table>
+<thead>
+<tr>
+<th align="center">系统中的进程状态</th>
+<th align="center">信号情况</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">系统中只有读进程</td>
+<td align="center">设置wsem、没有队列</td>
+</tr>
+<tr>
+<td align="center">系统中只有写进程</td>
+<td align="center">设置wsem和rsem、写进程在wsem上排队</td>
+</tr>
+<tr>
+<td align="center">既有读进程，又有写进程，但读者优先</td>
+<td align="center">由读进程设置wsem、有写进程设置rsem、所有写进程在wsem上排队、一个读进程在rsem上排队、其他读进程在z上排队</td>
+</tr>
+<tr>
+<td align="center">既有读进程，又有写进程，但写者优先</td>
+<td align="center">由写进程设置wsem、由写进程设置rsem、写进程在wsem上排队、一个读进程在rsem上排队、其他读进程在z上排队</td>
+</tr>
+</tbody></table>
 <blockquote>
 <p>对于读者-写者问题也可以使用消息传递的方式解决。</p>
 </blockquote>
