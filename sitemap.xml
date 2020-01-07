@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.whq6.top/2019/11/28/concurrent-and-deadlock/</loc>
+    
+    <lastmod>2020-01-07T10:22:32.021Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.whq6.top/2019/12/14/memory-manage/</loc>
+    
+    <lastmod>2019-12-13T13:40:34.733Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.whq6.top/2019/12/05/process-schedule/</loc>
     
     <lastmod>2019-12-09T12:26:22.099Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://blog.whq6.top/2019/11/23/go-install/</loc>
     
     <lastmod>2019-12-02T10:22:58.507Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.whq6.top/2019/11/28/concurrent-and-deadlock/</loc>
-    
-    <lastmod>2019-11-29T12:03:00.627Z</lastmod>
     
   </url>
   
